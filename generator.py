@@ -1,4 +1,4 @@
-from rag_pipeline import RagPipeline
+from rag_pipeline_with_memory import RagPipeline
 
 class Prediction:
     def pipeline_runner(self):
@@ -7,10 +7,14 @@ class Prediction:
         return qa_chain
 
     def predict_query(self, query, qa_chain):
-        result = qa_chain({"query": query})
-        return result["result"]
+        result = qa_chain({"question":query})['answer']
+        return result
 
 
 test = Prediction()
 qa_chain = test.pipeline_runner()
-print(test.predict_query("Who is to work in the Toilet?", qa_chain))
+
+query = input("Enter your Query Here: ")
+while query != "quit":
+    print(test.predict_query(query, qa_chain))
+    query = input("Enter your Query Here: ")
