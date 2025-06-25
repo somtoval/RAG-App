@@ -27,6 +27,7 @@ I’ve completed a working **RAG pipeline** with:
 - HuggingFace sentence-transformers for embeddings
 - FAISS for vector storage
 - Simple document upload and question answering
+- Memory
 
 ```python
 from pathlib import Path
@@ -34,5 +35,5 @@ from rag_pipeline import RagPipeline
 
 pipeline = RagPipeline()
 qa_chain = pipeline.run_pipeline(Path("example.pdf"))
-response = qa_chain.run("What is this document about?")
+response = qa_chain({"question":"What is this document about?"})["answer"]
 print(response)
