@@ -1,39 +1,53 @@
 # 🧠📚 Modular RAG Pipeline — Powered by FastAPI + LangChain
 
-Welcome to my **RAG (Retrieval-Augmented Generation)** project!  
-This is a modular and scalable system designed to accept document inputs, allow custom system prompts, and retrieve information with memory — all via a clean FastAPI interface.
+Welcome to the **RAG (Retrieval-Augmented Generation)** project!
 
-> ⚙️ Built for speed, flexibility, and continuous improvement.
+This is a modular and scalable system built to handle document ingestion, vector search, memory-powered interactions, and custom prompts — all wrapped in a FastAPI interface with a user-friendly frontend.
+
+> ⚙️ Built for speed, flexibility, and production-grade applications.
+
+![App Screenshot](pic.png)
 
 ---
 
 ## 🚀 Features
 
-- 🗂️ Upload documents (PDFs)
-- 🧩 Chunk documents and embed them using HuggingFace
-- 🧠 Store vectorized documents with FAISS
-- 🧾 Customizable system prompt (coming soon)
-- 🤖 Powered by Groq + LLaMA 3 for lightning-fast LLM inference
-- 🔁 Retrieval QA over your private documents
-- 🖥️ FastAPI-ready for production deployment
+- 📄 Upload and process PDF documents  
+- ✂️ Chunk documents and embed them using HuggingFace models  
+- 🧠 Vector store powered by FAISS  
+- 🔁 Conversational memory with LangChain's `ConversationBufferMemory`  
+- ⚙️ Dynamic RAG pipeline powered by **Groq + LLaMA 3** (blazing fast inference)  
+- 🌐 REST API and simple HTML frontend via **FastAPI**  
+- 📬 Query your documents and get relevant, context-aware answers  
+- 💬 Customizable system prompts (coming soon)
 
 ---
 
 ## ✅ Current Progress
 
-I’ve completed a working **RAG pipeline** with:
+The core system includes:
 
-- LangChain + Groq LLM (LLaMA 3)
-- HuggingFace sentence-transformers for embeddings
-- FAISS for vector storage
-- Simple document upload and question answering
-- Memory
+- ✅ LangChain with Groq’s LLaMA 3 LLM  
+- ✅ HuggingFace sentence-transformers (`all-MiniLM-L6-v2`) for document embeddings  
+- ✅ FAISS for in-memory vector storage  
+- ✅ Conversational memory (chat history preserved across queries)  
+- ✅ Document upload and question-answering from PDFs  
+- ✅ FastAPI backend with a basic but functional HTML UI  
+
+---
+
+## 🧪 Example Usage
 
 ```python
 from pathlib import Path
 from rag_pipeline import RagPipeline
 
+# Initialize the pipeline
 pipeline = RagPipeline()
+
+# Process a PDF and prepare the QA chain
 qa_chain = pipeline.run_pipeline(Path("example.pdf"))
-response = qa_chain({"question":"What is this document about?"})["answer"]
+
+# Ask a question
+response = qa_chain.run("What is this document about?")
 print(response)
